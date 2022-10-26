@@ -14,11 +14,45 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function ()
-    {
-        return view('welcome');
-    });
-    
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return view('/welcome');
+});
+
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+
+Route::group(['middleware' => 'auth'], function () {
+
+
+
+    Route::get('/about', function () {
+        return view('pages.about', [
+            "active" => "about",
+        ]);
+    });
+
+    Route::get('/people', function () {
+        return view('pages.people', [
+            "active" => "home",
+        ]);
+    });
+
+    Route::get('/movies', function () {
+        return view(
+            'pages.movies',
+            [
+                "active" => "movies",
+            ]
+        );
+    });
+
+    Route::get('/tvshow', function () {
+        return view(
+            'pages.tvshow',
+            [
+                "active" => "home",
+            ]
+        );
+    });
+});

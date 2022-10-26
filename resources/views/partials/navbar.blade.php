@@ -14,20 +14,22 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link {{ $active == 'movies' ? 'active' : '' }}" href="/about">Movies</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ $active == 'tvshow' ? 'active' : '' }}" href="/posts">Tv Show</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ $active == 'people' ? 'active' : '' }}" href="/categories">People</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ $active == 'about' ? 'active' : '' }}" href="/posts">About</a>
-                </li>
-            </ul>
+            @if (isset($active))
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {{ $active == 'movies' ? 'active' : '' }}" href="/movies">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ $active == 'tvshow' ? 'active' : '' }}" href="/tvshow">Tv Show</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ $active == 'people' ? 'active' : '' }}" href="/people">People</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ $active == 'about' ? 'active' : '' }}" href="/about">About</a>
+                    </li>
+                </ul>
+            @endif
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
