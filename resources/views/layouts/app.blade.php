@@ -8,13 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>
-        {{-- @if (isset($title))
-            {{ $title }}
-        @else --}}
-            UMDB
-        {{-- @endif --}}
-    </title>
+    <title>UMDB - @yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

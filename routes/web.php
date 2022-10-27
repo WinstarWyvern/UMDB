@@ -24,8 +24,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
 Route::group(['middleware' => 'auth'], function () {
 
-
-
     Route::get('/about', function () {
         return view('pages.about', [
             "active" => "about",
