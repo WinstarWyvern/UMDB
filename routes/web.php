@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::get('/movies', [MovieController::class, 'index']);
+    Route::get('/movies/{id}', [MovieController::class, 'show']);
 
     Route::get('/tvshow', function () {
         return view(

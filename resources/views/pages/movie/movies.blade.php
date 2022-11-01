@@ -19,7 +19,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $movie['title'] }}</h5>
                             <p class="card-text">{{ substr($movie['overview'], 0, 100) }}...</p>
-                            <a href="#" class="btn btn-primary">Read more..</a>
+                            <a href="/movies/{{ $movie["id"] }}" class="btn btn-primary">Read more..</a>
                         </div>
                     </div>
                 </div>

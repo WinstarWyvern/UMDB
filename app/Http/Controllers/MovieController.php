@@ -69,7 +69,11 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        //
+        $movieResponse = Http::get("https://api.themoviedb.org/3/movie/" . $id . "?api_key=2e642658089918c920af9adc5dd79a54&language=en-US");
+        $movieTemp = $movieResponse->json();
+        return view('pages.movie.movie', [
+            "movie" => $movieTemp
+        ]);
     }
 
     /**
