@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MovieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,14 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
     });
 
-    Route::get('/movies', function () {
-        return view(
-            'pages.movies',
-            [
-                "active" => "movies",
-            ]
-        );
-    });
+    Route::get('/movies', [MovieController::class, 'index']);
 
     Route::get('/tvshow', function () {
         return view(

@@ -1,11 +1,7 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-md navbar-light bg-warning shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/home') }}">
-            @if (isset($title))
-                {{ $title }}
-            @else
-                UMDB Landing Page
-            @endif
+            {{ isset(auth()->user()->id) ? 'UMDB' : 'UMDB LANDING PAGE' }}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -14,22 +10,20 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            @if (isset($active))
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {{ $active == 'movies' ? 'active' : '' }}" href="/movies">Movies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ $active == 'tvshow' ? 'active' : '' }}" href="/tvshow">Tv Show</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ $active == 'people' ? 'active' : '' }}" href="/people">People</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ $active == 'about' ? 'active' : '' }}" href="/about">About</a>
-                    </li>
-                </ul>
-            @endif
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('movies') ? 'active' : '' }}" href="/movies">Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('tvshow') ? 'active' : '' }}" href="/tvshow">Tv Show</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('people') ? 'active' : '' }}" href="/people">People</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('people') ? 'active' : '' }}" href="/about">About</a>
+                </li>
+            </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
