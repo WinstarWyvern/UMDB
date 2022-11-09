@@ -21,7 +21,7 @@
                     <a class="nav-link {{ Request::is('people') ? 'active' : '' }}" href="/people">People</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('people') ? 'active' : '' }}" href="/about">About</a>
+                    <a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="/about">About</a>
                 </li>
             </ul>
 

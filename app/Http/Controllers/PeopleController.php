@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PeopleController extends Controller
 {
@@ -13,7 +17,24 @@ class PeopleController extends Controller
      */
     public function index()
     {
-        return view('pages.people.people');
+        $people = [];
+        for ($i = 1; $i <= 5; $i++) {
+            $peopleResponse = Http::get("https://api.themoviedb.org/3/person/popular?api_key=2e642658089918c920af9adc5dd79a54&language=en-US&page" . $i);
+            $peopleTemp = $peopleResponse->json();
+            $people = array_merge($people, $peopleTemp["results"]);
+        }
+
+        $people = $this->paginate($people)->withPath('');
+        return view('pages.people.people',[
+            'people' => $people
+        ]);
+    }
+
+    public function paginate($items, $perPage = 20, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
     /**
