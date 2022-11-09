@@ -66,7 +66,11 @@ class PeopleController extends Controller
      */
     public function show($id)
     {
-        //
+        $personResponse = Http::get("https://api.themoviedb.org/3/person/" . $id . "?api_key=2e642658089918c920af9adc5dd79a54&language=en-US");
+        $personTemp = $personResponse->json();
+        return view('pages.people.person', [
+            "person" => $personTemp
+        ]);
     }
 
     /**
