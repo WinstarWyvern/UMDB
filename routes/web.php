@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\PeopleController;
+use App\Http\Controllers\TvShowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,21 +33,12 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
     });
 
-    Route::get('/people', function () {
-        return view('pages.people', [
-            "active" => "home",
-        ]);
-    });
+    Route::get('/people', [PeopleController::class, 'index']);
+    Route::get('people/{id}', [PeopleController::class, 'show']);
 
     Route::get('/movies', [MovieController::class, 'index']);
     Route::get('/movies/{id}', [MovieController::class, 'show']);
 
-    Route::get('/tvshow', function () {
-        return view(
-            'pages.tvshow',
-            [
-                "active" => "home",
-            ]
-        );
-    });
+    Route::get('/tvshow', [TvShowController::class, 'index']);
+    Route::get('/tvshow/{id}', [TvShowController::class, 'show']);
 });
