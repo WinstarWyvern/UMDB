@@ -32,6 +32,16 @@
                                 <td>{{ date('d F Y', strtotime($show['last_air_date'])) }}</td>
                             </tr>
                             <tr>
+                                <td>Seasons</td>
+                                <td>:</td>
+                                <td>{{ $show['number_of_seasons'] }}</td>
+                            </tr>
+                            <tr>
+                                <td>Episodes</td>
+                                <td>:</td>
+                                <td>{{ $show['number_of_episodes'] }}</td>
+                            </tr>
+                            <tr>
                                 <td class="align-top">Synopsis</td>
                                 <td class="align-top">:</td>
                                 <td class="align-top">
