@@ -69,7 +69,7 @@ class TvShowController extends Controller
     {
         $tvshowResponse = Http::get("https://api.themoviedb.org/3/tv/" . $id . "?api_key=2e642658089918c920af9adc5dd79a54&language=en-US");
         $tvshowTemp = $tvshowResponse->json();
-        return view('pages.people.person', [
+        return view('pages.tvshow.tvshow', [
             "show" => $tvshowTemp
         ]);
     }
