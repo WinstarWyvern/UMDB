@@ -23,22 +23,18 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
-Route::group(['middleware' => 'auth'], function () {
-
-    Route::get('/about', function () {
-        return view('pages.about', [
-            "active" => "about",
-        ]);
-    });
-
-    Route::get('/people', [PeopleController::class, 'index']);
-    Route::get('people/{id}', [PeopleController::class, 'show']);
-
-    Route::get('/movies', [MovieController::class, 'index']);
-    Route::get('/movies/{id}', [MovieController::class, 'show']);
-
-    Route::get('/tvshow', [TvShowController::class, 'index']);
-    Route::get('/tvshow/{id}', [TvShowController::class, 'show']);
+Route::get('/about', function () {
+    return view('pages.about', [
+        "active" => "about",
+    ]);
 });
+
+Route::get('/people', [PeopleController::class, 'index']);
+Route::get('people/{id}', [PeopleController::class, 'show']);
+
+Route::get('/movies', [MovieController::class, 'index']);
+Route::get('/movies/{id}', [MovieController::class, 'show']);
+
+Route::get('/tvshow', [TvShowController::class, 'index']);
+Route::get('/tvshow/{id}', [TvShowController::class, 'show']);
