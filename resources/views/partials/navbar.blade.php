@@ -52,14 +52,17 @@
                             <a class="dropdown-item" href="{{ route('profile') }}">
                                 Profile
                             </a>
+                            @can('user')
+                                <a class="dropdown-item" href="">
+                                    My List
+                                </a>
+                            @endcan
 
-                            <a class="dropdown-item" href="">
-                                My List
-                            </a>
-
-                            <a class="dropdown-item" href="">
-                                Manage User
-                            </a>
+                            @can('admin')
+                                <a class="dropdown-item" href="">
+                                    Manage User
+                                </a>
+                            @endcan
 
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
