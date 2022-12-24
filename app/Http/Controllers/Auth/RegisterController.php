@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -30,6 +31,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -49,11 +51,16 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        $validator = Validator::make($data, [
+            'name' => 'required|string|min:5|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'password' => 'required|string|alpha_num|min:8|confirmed',
+            'gender' => 'required|string',
+            'dateofbirth' => 'required|before:today|after:01-01-1900',
+            'country' => 'required|string',
         ]);
+
+        return $validator;
     }
 
     /**
@@ -68,6 +75,14 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'gender' => $data['gender'],
+            'dateofbirth' => $data['dateofbirth'],
+            'country' => $data['country']
         ]);
+    }
+
+    protected function registered(Request $request)
+    {
+        $request->session()->flash('registered', 'You have successfully registered to Barbatos Shop !');
     }
 }

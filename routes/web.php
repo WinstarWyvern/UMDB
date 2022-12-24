@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\TvShowController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,5 @@ Route::get('/movies/{id}', [MovieController::class, 'show']);
 
 Route::get('/tvshow', [TvShowController::class, 'index']);
 Route::get('/tvshow/{id}', [TvShowController::class, 'show']);
+
+Route::get('/profile', ProfileController::class)->name('profile');
