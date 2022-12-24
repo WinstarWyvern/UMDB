@@ -23,6 +23,7 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="/about">About</a>
                 </li>
+
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -48,6 +49,18 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="">
+                                Profile
+                            </a>
+
+                            <a class="dropdown-item" href="">
+                                My List
+                            </a>
+
+                            <a class="dropdown-item" href="">
+                                Manage User
+                            </a>
+
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
