@@ -36,6 +36,6 @@ Route::get('/movies/{id}', [MovieController::class, 'show']);
 Route::get('/tvshow', [TvShowController::class, 'index']);
 Route::get('/tvshow/{id}', [TvShowController::class, 'show']);
 
-Route::resource('/profiles', ProfileController::class);
+Route::resource('/profiles', ProfileController::class)->parameters(['profiles' => 'user:id']);;
 
 Route::resource('/users', UserController::class);
