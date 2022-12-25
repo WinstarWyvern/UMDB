@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'User List')
 
 @section('content')
     <div class="container">
@@ -23,7 +24,7 @@
         <div class="bg-white my-md-2">
             <div
                 class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">User list</h1>
+                <h1 class="h2">User List</h1>
             </div>
 
             <div class="table-responsive col-lg-12">

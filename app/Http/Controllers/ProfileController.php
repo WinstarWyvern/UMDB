@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -13,7 +16,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('pages.user.profile');
+        return view('pages.user.profile',[
+            'user' => Auth::user(),
+        ]);
     }
 
     /**
@@ -54,9 +59,11 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('pages.user.profile_edit',[
+            "user" => $user,
+        ]);
     }
 
     /**

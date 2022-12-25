@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Profile')
+@section('title', 'Edit Profile')
 
 @section('content')
     <div class="row justify-content-center">
@@ -13,7 +13,7 @@
 
                         <div class="col-md-12">
                             <input id="email" type="email" class="form-control" name="name"
-                                value="{{ Auth::user()->name }}" disabled>
+                                value="{{ Auth::user()->name }}">
                         </div>
                     </div>
 
@@ -22,7 +22,7 @@
 
                         <div class="col-md-12">
                             <input id="email" type="email" class="form-control" name="email"
-                                value="{{ Auth::user()->email }}" disabled>
+                                value="{{ Auth::user()->email }}">
                         </div>
                     </div>
 
@@ -31,7 +31,7 @@
 
                         <div class="col-md-12">
                             <input id="gender" type="gender" class="form-control" name="gender"
-                                value="{{ Auth::user()->gender }}" disabled>
+                                value="{{ Auth::user()->gender }}">
                         </div>
                     </div>
 
@@ -41,7 +41,7 @@
 
                         <div class="col-md-12">
                             <input id="dateofbirth" type="dateofbirth" class="form-control" name="dateofbirth"
-                                value="{{ Auth::user()->dateofbirth }}" disabled>
+                                value="{{ Auth::user()->dateofbirth }}">
                         </div>
                     </div>
 
@@ -50,7 +50,7 @@
 
                         <div class="col-md-12">
                             <input id="country" type="country" class="form-control" name="country"
-                                value="{{ Auth::user()->country }}" disabled>
+                                value="{{ Auth::user()->country }}">
                         </div>
                     </div>
                 </div>
@@ -59,8 +59,8 @@
 
             <div class="row mt-3 justify-content-center">
                 <div class="col-md-10 text-center">
-                    <a href="{{ route('profiles.edit', Auth::user()) }}">
-                        <button class="btn btn-warning btn-lg">Edit</button>
+                    <a href="">
+                        <button class="btn btn-primary btn-lg">Save</button>
                     </a>
 
                 </div>
