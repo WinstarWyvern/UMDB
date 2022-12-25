@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\TvShowController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,17 +20,11 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('/welcome');
-});
+Route::get('/', WelcomeController::class)->name('welcome');
 
 Auth::routes();
 
-Route::get('/about', function () {
-    return view('pages.user.about', [
-        "active" => "about",
-    ]);
-});
+Route::get('/about', AboutController::class)->name('about');
 
 Route::get('/people', [PeopleController::class, 'index']);
 Route::get('people/{id}', [PeopleController::class, 'show']);

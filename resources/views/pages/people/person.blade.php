@@ -4,7 +4,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-9 border border-dark mx-0 px-0 rounded">
+            <div class="col-lg-9 border border-dark mx-0 px-0 rounded bg-white">
                 <div class="d-flex">
                     <div class="col-lg-3">
                         <img src="https://image.tmdb.org/t/p/w200/{{ $person['profile_path'] }}" alt=""
