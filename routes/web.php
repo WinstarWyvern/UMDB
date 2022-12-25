@@ -26,7 +26,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/about', function () {
-    return view('pages.about', [
+    return view('pages.user.about', [
         "active" => "about",
     ]);
 });

@@ -59,7 +59,7 @@
                             @endcan
 
                             @can('admin')
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item" href="/users">
                                     Manage User
                                 </a>
                             @endcan
