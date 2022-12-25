@@ -76,7 +76,18 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        if($user->isAdmin) {
+            User::where('id', $user->id)->update([
+                'isAdmin' => false,
+            ]);
+        }
+        else {
+            User::where('id', $user->id)->update([
+                'isAdmin' => true,
+            ]);
+        }
+
+        return redirect('/users')->with('updated', 'User Role has been updated!');
     }
 
     /**
@@ -87,6 +98,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect('/users')->with('deleted', 'User has been deleted!');
     }
 }
