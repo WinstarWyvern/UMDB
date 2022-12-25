@@ -7,6 +7,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\TvShowController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 
 /*
@@ -36,3 +37,5 @@ Route::get('/tvshow', [TvShowController::class, 'index']);
 Route::get('/tvshow/{id}', [TvShowController::class, 'show']);
 
 Route::get('/profile', ProfileController::class)->name('profile');
+
+Route::resource('/users', UserController::class);
