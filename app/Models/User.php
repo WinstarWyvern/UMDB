@@ -50,4 +50,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Person::class);
     }
+
+    public function tvshows()
+    {
+        return $this->hasMany(TvShow::class);
+    }
+
+    public function movies()
+    {
+        return $this->hasMany(Movie::class);
+    }
 }
