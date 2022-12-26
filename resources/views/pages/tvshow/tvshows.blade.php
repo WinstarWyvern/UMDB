@@ -19,7 +19,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $show['name'] }}</h5>
                             <p class="card-text">{{ substr($show['overview'], 0, 100) }}...</p>
-                            <a href="/tvshow/{{ $show["id"] }}" class="btn btn-primary">Read more..</a>
+                            <a href="{{ route('tvshows.show', $show['id']) }}" class="btn btn-primary">
+                                Read more..
+                            </a>
                         </div>
                     </div>
                 </div>

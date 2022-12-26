@@ -18,7 +18,6 @@ class CreateMoviesTable extends Migration
             $table->foreignId('user_id');
             $table->integer('movie_id');
             $table->integer('score');
-            $table->text('review');
             $table->timestamps();
         });
     }

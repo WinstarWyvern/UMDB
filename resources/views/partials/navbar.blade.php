@@ -12,13 +12,14 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('movies') ? 'active' : '' }}" href="/movies">Movies</a>
+                    <a class="nav-link {{ Request::is('movies') ? 'active' : '' }}"
+                        href="{{ route('movies.index') }}">Movies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('tvshow') ? 'active' : '' }}" href="/tvshow">Tv Show</a>
+                    <a class="nav-link {{ Request::is('tvshows') ? 'active' : '' }}" href="{{ route('tvshows.index') }}">Tv Show</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('people') ? 'active' : '' }}" href="/people">People</a>
+                    <a class="nav-link {{ Request::is('people') ? 'active' : '' }}" href="{{ route('people.index') }}">People</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="/about">About</a>

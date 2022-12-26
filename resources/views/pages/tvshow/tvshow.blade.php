@@ -63,6 +63,13 @@
                                 <td>:</td>
                                 <td>{{ $show['vote_average'] }}</td>
                             </tr>
+                            @if (auth()->check())
+                                <tr>
+                                    <td>My Rating</td>
+                                    <td>:</td>
+                                    <td>{{ $userShow['score'] ?? '-' }}</td>
+                                </tr>
+                            @endif
                             <tr>
                                 <td class="align-top">Genre</td>
                                 <td class="align-top">:</td>
@@ -81,20 +88,42 @@
                 </div>
             </div>
 
-            <div class="d-flex mt-lg-5 justify-content-evenly">
-                <div>
-                    <button type="button" class="btn btn-primary">
-                        <i class="bi bi-plus"></i> Add</button>
-                </div>
-                {{-- <div>
-                                <button type="button" class="btn btn-warning">Edit Your Score</button>
+            @if (auth()->check())
+                <div class="d-flex mt-lg-5 justify-content-center">
+                    <div>
+                        <form action="{{ route('tvshows.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="show_id" value="{{ $show['id'] }}">
+                            <div class="input-group input-group-sm mb-3">
+                                <input type="text" class="form-control" aria-describedby="save-score-btn" name="score"
+                                    placeholder="Input New Score [1-10]">
+                                <button class="btn btn-success" type="submit" id="save-score-btn">
+                                    Save
+                                </button>
+                            </div>
+                            {{-- <div>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="bi bi-plus"></i> Add</button>
                             </div> --}}
-                <div>
-                    <button type="button" class="btn btn-danger">
-                        <i class="bi bi-x"></i> Remove
-                    </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+
+                <div class="d-flex justify-content-center">
+                    @if (isset($userShow))
+                        <form action="{{ route('tvshows.destroy', $userShow['id']) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <div>
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="bi bi-x"></i> Remove</button>
+                            </div>
+                        </form>
+                    @endif
+                </div>
+
+
+            @endif
 
         </div>
     </div>

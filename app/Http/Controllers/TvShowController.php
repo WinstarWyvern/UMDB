@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TvShow;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Pagination\Paginator;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 
@@ -56,7 +59,19 @@ class TvShowController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedScore = $request->validate([
+            "score" => 'required|digits_between:0,10'
+        ]);
+
+        $user_id = Auth::user()->id;
+        $show_id = $request->show_id;
+        TvShow::create([
+            "show_id" => $request->show_id,
+            "user_id" => $user_id,
+            "score" => $validatedScore['score'],
+        ]);
+
+        return redirect('/tvshows/' . $show_id);
     }
 
     /**
@@ -69,8 +84,11 @@ class TvShowController extends Controller
     {
         $tvshowResponse = Http::get("https://api.themoviedb.org/3/tv/" . $id . "?api_key=2e642658089918c920af9adc5dd79a54&language=en-US");
         $tvshowTemp = $tvshowResponse->json();
+
+        $userShow = TvShow::where('user_id', Auth::user()->id)->where('show_id', $id)->first();
         return view('pages.tvshow.tvshow', [
-            "show" => $tvshowTemp
+            "show" => $tvshowTemp,
+            "userShow" => $userShow
         ]);
     }
 
@@ -105,6 +123,10 @@ class TvShowController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deletedShow = TvShow::where('id', $id)->first();
+        $show_id = $deletedShow->show_id;
+        $deletedShow->delete();
+
+        return redirect('/tvshows/' . $show_id);
     }
 }

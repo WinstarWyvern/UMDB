@@ -18,7 +18,6 @@ class CreateTvShowsTable extends Migration
             $table->foreignId('user_id');
             $table->integer('show_id');
             $table->integer('score');
-            $table->text('review');
             $table->timestamps();
         });
     }

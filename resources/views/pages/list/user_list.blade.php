@@ -26,18 +26,47 @@
             </ul>
             <div class="tab-content text-white" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-movie" role="tabpanel" aria-labelledby="pills-movie-tab"
-                    tabindex="0">Movie List
+                    tabindex="0">
+                    <div class="row text-dark">
+                        @if (count($shows) == 0)
+                            <h1 class="text-light">No Movies In Your List Yet</h1>
+                        @else
+                            @foreach ($movies as $movie)
+
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="pills-tvshow" role="tabpanel" aria-labelledby="pills-tvshow-tab"
                     tabindex="0">
-                    Tv Show List
+                    <div class="row text-dark">
+                        @if (count($shows) == 0)
+                            <h1 class="text-light">No Tv Shows In Your List Yet</h1>
+                        @else
+                            @foreach ($shows as $show)
+                                <div class="col-lg-3 my-2">
+                                    <div class="card">
+                                        <img src="https://image.tmdb.org/t/p/w185/{{ $show['poster_path'] }}"
+                                            class="card-img-top img-fluid">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $show['name'] }}</h5>
+                                            <p class="card-text">{{ substr($show['overview'], 0, 100) }}...</p>
+                                            <a href="{{ route('tvshows.show', $show['id']) }}" class="btn btn-primary">
+                                                Read more..
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="pills-people" role="tabpanel" aria-labelledby="pills-people-tab"
                     tabindex="0">
 
                     <div class="row text-dark">
-                        @if (count($people) <= 0)
-                            <h1>No Favorite People Yet</h1>
+                        @if (count($people) == 0)
+                            <h1 class="text-light">No Favorite People In Your Yet</h1>
                         @else
                             @foreach ($people as $person)
                                 <div class="col-lg-3 my-2">

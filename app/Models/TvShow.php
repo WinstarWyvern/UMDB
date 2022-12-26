@@ -13,7 +13,6 @@ class TvShow extends Model
         'user_id',
         'show_id',
         'score',
-        'review',
     ];
 
     public function users()

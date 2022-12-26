@@ -30,11 +30,9 @@ Route::get('/about', AboutController::class)->name('about');
 
 Route::resource('/people', PersonController::class);
 
-Route::get('/movies', [MovieController::class, 'index']);
-Route::get('/movies/{id}', [MovieController::class, 'show']);
+Route::resource('/movies', MovieController::class);
 
-Route::get('/tvshow', [TvShowController::class, 'index']);
-Route::get('/tvshow/{id}', [TvShowController::class, 'show']);
+Route::resource('/tvshows', TvShowController::class);
 
 Route::resource('/profiles', ProfileController::class)->parameters(['profiles' => 'user:id']);
 

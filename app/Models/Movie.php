@@ -13,7 +13,6 @@ class Movie extends Model
         'user_id',
         'movie_id',
         'score',
-        'review',
     ];
 
     public function users()
