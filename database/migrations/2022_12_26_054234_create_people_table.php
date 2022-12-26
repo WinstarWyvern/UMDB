@@ -16,7 +16,8 @@ class CreatePeopleTable extends Migration
         Schema::create('people', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->boolean('isFavorite')->default(false);
+            $table->integer('person_id')->default(null);
+            $table->boolean('isFavorite')->default(true);
             $table->timestamps();
         });
     }

@@ -27,8 +27,7 @@ Auth::routes();
 
 Route::get('/about', AboutController::class)->name('about');
 
-Route::get('/people', [PersonController::class, 'index']);
-Route::get('people/{id}', [PersonController::class, 'show']);
+Route::resource('/people', PersonController::class);
 
 Route::get('/movies', [MovieController::class, 'index']);
 Route::get('/movies/{id}', [MovieController::class, 'show']);

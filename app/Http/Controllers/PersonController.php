@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Person;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Pagination\Paginator;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class PersonController extends Controller
@@ -55,7 +58,14 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user_id = Auth::user()->id;
+        $person_id = $request->person_id;
+        Person::create([
+            "person_id" => $request->person_id,
+            "user_id" => $user_id,
+        ]);
+
+        return redirect('/people/' . $person_id);
     }
 
     /**
@@ -68,8 +78,11 @@ class PersonController extends Controller
     {
         $personResponse = Http::get("https://api.themoviedb.org/3/person/" . $id . "?api_key=2e642658089918c920af9adc5dd79a54&language=en-US");
         $personTemp = $personResponse->json();
+
+        $userPerson = Person::where('user_id', Auth::user()->id)->where('person_id', $id)->first();
         return view('pages.people.person', [
-            "person" => $personTemp
+            "person" => $personTemp,
+            "userPerson" => $userPerson,
         ]);
     }
 
@@ -104,6 +117,10 @@ class PersonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deletedPerson = Person::where('id', $id)->first();
+        $person_id = $deletedPerson->person_id;
+        $deletedPerson->delete();
+
+        return redirect('/people/' . $person_id);
     }
 }

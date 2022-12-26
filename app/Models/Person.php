@@ -11,7 +11,8 @@ class Person extends Model
 
     protected $fillable = [
         'isFavorite',
-        'user_id'
+        'user_id',
+        'person_id'
     ];
 
     public function users()

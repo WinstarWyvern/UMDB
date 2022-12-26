@@ -64,18 +64,34 @@
                 </div>
             </div>
 
-            <div class="d-flex mt-lg-5 justify-content-evenly">
-                <div>
-                    <button type="button" class="btn btn-primary">
-                        <i class="bi bi-plus"></i> Add</button>
-                </div>
+            @if (auth()->check())
+                <div class="d-flex mt-lg-5 justify-content-center">
+                    @if (!isset($userPerson['isFavorite']))
+                        <form action="{{ route('people.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="person_id" value="{{ $person['id'] }}">
+                            <div>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="bi bi-star"></i> Favorite</button>
+                            </div>
+                        </form>
+                    @else
+                        <form action="{{ route('people.destroy', $userPerson['id']) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <input type="hidden" name="person_id" value="{{ $person['id'] }}">
+                            <div>
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="bi bi-star-fill"></i> Remove Favorite</button>
+                            </div>
+                        </form>
+                    @endif
 
-                <div>
-                    <button type="button" class="btn btn-danger">
-                        <i class="bi bi-x"></i> Remove
-                    </button>
+
+
                 </div>
-            </div>
+            @endif
+
 
         </div>
     </div>
