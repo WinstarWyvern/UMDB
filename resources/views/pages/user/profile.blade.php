@@ -2,6 +2,16 @@
 @section('title', 'Profile')
 
 @section('content')
+
+    @if (session()->has('updated'))
+        <div class="row justify-content-center">
+            <div class="alert alert-warning alert-dismissible col-md-6" role="alert">
+                {{ session('updated') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="card">

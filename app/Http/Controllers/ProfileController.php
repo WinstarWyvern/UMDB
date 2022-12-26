@@ -16,7 +16,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('pages.user.profile',[
+        return view('pages.user.profile', [
             'user' => Auth::user(),
         ]);
     }
@@ -61,7 +61,7 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
-        return view('pages.user.profile_edit',[
+        return view('pages.user.profile_edit', [
             "user" => $user,
         ]);
     }
@@ -75,7 +75,19 @@ class ProfileController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        dd("tes");
+        $validatedData = $request->validate([
+            'name' => 'required|string|min:3|max:255',
+            'email' => 'required|email',
+            'gender' => 'required|string',
+            'dateofbirth' => 'required|before:today|after:01-01-1900',
+            'country' => 'required|string',
+        ]);
+
+        if ($request->email != $user->email) {
+            $validatedData['email'] = $request->email;
+        }
+        // dd($validatedData);
+        User::where('id', $user['id'])->update($validatedData);
 
         return redirect('/profiles')->with('updated', 'Profile has been updated!');
     }

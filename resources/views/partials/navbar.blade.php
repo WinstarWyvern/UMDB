@@ -53,7 +53,7 @@
                                 Profile
                             </a>
                             @can('user')
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item" href="/list">
                                     My List
                                 </a>
                             @endcan

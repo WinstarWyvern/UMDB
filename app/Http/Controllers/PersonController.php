@@ -8,7 +8,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class PeopleController extends Controller
+class PersonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +25,7 @@ class PeopleController extends Controller
         }
 
         $people = $this->paginate($people)->withPath('');
-        return view('pages.people.people',[
+        return view('pages.people.people', [
             'people' => $people
         ]);
     }

@@ -69,9 +69,7 @@
                     <button type="button" class="btn btn-primary">
                         <i class="bi bi-plus"></i> Add</button>
                 </div>
-                {{-- <div>
-                                <button type="button" class="btn btn-warning">Edit Your Score</button>
-                            </div> --}}
+
                 <div>
                     <button type="button" class="btn btn-danger">
                         <i class="bi bi-x"></i> Remove

@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\MovieController;
-use App\Http\Controllers\PeopleController;
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\TvShowController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 
 /*
@@ -27,8 +27,8 @@ Auth::routes();
 
 Route::get('/about', AboutController::class)->name('about');
 
-Route::get('/people', [PeopleController::class, 'index']);
-Route::get('people/{id}', [PeopleController::class, 'show']);
+Route::get('/people', [PersonController::class, 'index']);
+Route::get('people/{id}', [PersonController::class, 'show']);
 
 Route::get('/movies', [MovieController::class, 'index']);
 Route::get('/movies/{id}', [MovieController::class, 'show']);
@@ -36,6 +36,10 @@ Route::get('/movies/{id}', [MovieController::class, 'show']);
 Route::get('/tvshow', [TvShowController::class, 'index']);
 Route::get('/tvshow/{id}', [TvShowController::class, 'show']);
 
-Route::resource('/profiles', ProfileController::class)->parameters(['profiles' => 'user:id']);;
+Route::resource('/profiles', ProfileController::class)->parameters(['profiles' => 'user:id']);
 
 Route::resource('/users', UserController::class);
+
+Route::get('/list', function(){
+    return view('pages.list.user_list');
+});

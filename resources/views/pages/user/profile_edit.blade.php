@@ -10,6 +10,9 @@
                 <div class="card">
                     <div class="card-header text-md-center">{{ __('Profile') }}</div>
                     <div class="card-body">
+
+                        <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+
                         <div class="row mb-3">
                             <label for="name" class="col-md-12 col-form-label text-md-start">{{ __('Name') }}</label>
 
@@ -31,6 +34,12 @@
                             <div class="col-md-12">
                                 <input id="email" type="email" class="form-control" name="email"
                                     value="{{ Auth::user()->email }}">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
