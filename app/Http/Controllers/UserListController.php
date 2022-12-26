@@ -29,6 +29,7 @@ class UserListController extends Controller
         foreach ($userPeople as $userPerson) {
             $id = $userPerson['person_id'];
             $personResponse = Http::get("https://api.themoviedb.org/3/person/" . $id . "?api_key=2e642658089918c920af9adc5dd79a54&language=en-US");
+
             $personTemp = json_decode($personResponse, true);
             $personTemp['relation_id'] = $userPerson['id'];
             array_push($people, $personTemp);
@@ -37,20 +38,22 @@ class UserListController extends Controller
         $tvShows = [];
 
         foreach ($userShows as $userShow) {
-            $id = $userShows['show_id'];
-            $tvshowResponse = Http::get("https://api.themoviedb.org/3/tv/" . $id . "?api_key=2e642658089918c920af9adc5dd79a54&language=en-US");
-            $tvshowTemp = json_decode($tvshowResponse, true);
+            $id = $userShow['show_id'];
+            $tvShowResponse = Http::get("https://api.themoviedb.org/3/tv/" . $id . "?api_key=2e642658089918c920af9adc5dd79a54&language=en-US");
+
+            $tvShowTemp = json_decode($tvShowResponse, true);
             $tvShowTemp['relation_id'] = $userShow['id'];
-            array_push($tvShows, $tvshowTemp);
+            array_push($tvShows, $tvShowTemp);
         }
 
         $movies = [];
 
         foreach ($userMovies as $userMovie) {
-            $id = $userPerson['movie_id'];
+            $id = $userMovie['movie_id'];
             $movieResponse = Http::get("https://api.themoviedb.org/3/movie/" . $id . "?api_key=2e642658089918c920af9adc5dd79a54&language=en-US");
+
             $movieTemp = json_decode($movieResponse, true);
-            $movieTemp['relation_id'] = $userShow['id'];
+            $movieTemp['relation_id'] = $userMovie['id'];
             array_push($movies, $movieTemp);
         }
 
@@ -59,6 +62,8 @@ class UserListController extends Controller
             "userPeople" => $userPeople,
             "shows" => $tvShows,
             "userShows" => $userShows,
+            "movies" =>$movies,
+            "userMovies" =>$userMovies,
         ]);
     }
 }

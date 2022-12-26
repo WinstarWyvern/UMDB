@@ -32,7 +32,6 @@
                             <h1 class="text-light">No Movies In Your List Yet</h1>
                         @else
                             @foreach ($movies as $movie)
-
                             @endforeach
                         @endif
                     </div>
@@ -54,6 +53,17 @@
                                             <a href="{{ route('tvshows.show', $show['id']) }}" class="btn btn-primary">
                                                 Read more..
                                             </a>
+                                        </div>
+                                        <div class="card-footer">
+                                            <form action="{{ route('tvshows.destroy', $show['relation_id']) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <div>
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="bi bi-x"></i> Remove</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

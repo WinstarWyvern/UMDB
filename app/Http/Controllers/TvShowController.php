@@ -112,7 +112,15 @@ class TvShowController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedScore = $request->validate([
+            "score" => 'required|digits_between:0,10'
+        ]);
+
+        $show_id = $request->show_id;
+
+        TvShow::where('id', $id)->update($validatedScore);
+
+        return redirect('/tvshows/' . $show_id);
     }
 
     /**

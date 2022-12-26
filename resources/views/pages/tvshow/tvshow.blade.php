@@ -89,38 +89,56 @@
             </div>
 
             @if (auth()->check())
-                <div class="d-flex mt-lg-5 justify-content-center">
-                    <div>
-                        <form action="{{ route('tvshows.store') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="show_id" value="{{ $show['id'] }}">
-                            <div class="input-group input-group-sm mb-3">
-                                <input type="text" class="form-control" aria-describedby="save-score-btn" name="score"
-                                    placeholder="Input New Score [1-10]">
-                                <button class="btn btn-success" type="submit" id="save-score-btn">
-                                    Save
-                                </button>
-                            </div>
-                            {{-- <div>
-                                <button type="submit" class="btn btn-success">
-                                    <i class="bi bi-plus"></i> Add</button>
-                            </div> --}}
-                        </form>
+                @if (!isset($userShow['id']))
+                    <div class="d-flex mt-lg-5 justify-content-center">
+                        <div>
+                            <form action="{{ route('tvshows.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="show_id" value="{{ $show['id'] }}">
+                                <div class="input-group input-group-sm mb-3">
+                                    <input type="number" class="form-control" aria-describedby="save-score-btn"
+                                        name="score" placeholder="Input Score [1-10]">
+                                    <button class="btn btn-success" type="submit" id="save-score-btn">
+                                        Save
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                @else
+                    <div class="d-flex mt-lg-5 justify-content-center">
+                        <div>
+                            <form action="{{ route('tvshows.update', $userShow['id']) }}" method="POST">
+                                @csrf
+                                @method('patch')
+                                <input type="hidden" name="show_id" value="{{ $show['id'] }}">
+                                <div class="input-group input-group-sm mb-3">
+                                    <input type="number" class="form-control" aria-describedby="save-score-btn"
+                                        name="score" placeholder="Input New Score [1-10]">
+                                    <button class="btn btn-success" type="submit" id="save-score-btn">
+                                        Update
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
-                <div class="d-flex justify-content-center">
-                    @if (isset($userShow))
-                        <form action="{{ route('tvshows.destroy', $userShow['id']) }}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <div>
-                                <button type="submit" class="btn btn-danger">
-                                    <i class="bi bi-x"></i> Remove</button>
-                            </div>
-                        </form>
-                    @endif
-                </div>
+                    <div class="d-flex justify-content-center">
+                        @if (isset($userShow))
+                            <form action="{{ route('tvshows.destroy', $userShow['id']) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <div>
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="bi bi-x"></i> Remove</button>
+                                </div>
+                            </form>
+                        @endif
+                    </div>
+                @endif
+
+
+
 
 
             @endif
