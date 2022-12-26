@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movie;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Pagination\Paginator;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 
@@ -58,7 +61,19 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedScore = $request->validate([
+            "score" => 'required|digits_between:0,10'
+        ]);
+
+        $user_id = Auth::user()->id;
+        $movie_id = $request->movie_id;
+        Movie::create([
+            "movie_id" => $request->movie_id,
+            "user_id" => $user_id,
+            "score" => $validatedScore['score'],
+        ]);
+
+        return redirect('/movies/' . $movie_id);
     }
 
     /**
@@ -71,8 +86,11 @@ class MovieController extends Controller
     {
         $movieResponse = Http::get("https://api.themoviedb.org/3/movie/" . $id . "?api_key=2e642658089918c920af9adc5dd79a54&language=en-US");
         $movieTemp = $movieResponse->json();
+
+        $userMovie = Movie::where('user_id', Auth::user()->id)->where('movie_id', $id)->first();
         return view('pages.movie.movie', [
-            "movie" => $movieTemp
+            "movie" => $movieTemp,
+            "userMovie" => $userMovie
         ]);
     }
 
@@ -96,7 +114,15 @@ class MovieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedScore = $request->validate([
+            "score" => 'required|digits_between:0,10'
+        ]);
+
+        $movie_id = $request->movie_id;
+
+        Movie::where('id', $id)->update($validatedScore);
+
+        return redirect('/movies/' . $movie_id);
     }
 
     /**
@@ -107,6 +133,10 @@ class MovieController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deletedMovie = Movie::where('id', $id)->first();
+        $movie_id = $deletedMovie->movie_id;
+        $deletedMovie->delete();
+
+        return redirect('/movies/' . $movie_id);
     }
 }

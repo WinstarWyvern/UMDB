@@ -28,10 +28,35 @@
                 <div class="tab-pane fade show active" id="pills-movie" role="tabpanel" aria-labelledby="pills-movie-tab"
                     tabindex="0">
                     <div class="row text-dark">
-                        @if (count($shows) == 0)
+                        @if (count($movies) == 0)
                             <h1 class="text-light">No Movies In Your List Yet</h1>
                         @else
                             @foreach ($movies as $movie)
+                                <div class="col-lg-3 my-2">
+                                    <div class="card">
+                                        <img src="https://image.tmdb.org/t/p/w185/{{ $movie['poster_path'] }}"
+                                            class="card-img-top img-fluid">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $movie['title'] }}</h5>
+                                            <p class="card-text">{{ substr($movie['overview'], 0, 100) }}...</p>
+                                            <a href="/movies/{{ $movie['id'] }}" class="btn btn-primary">
+                                                Read more..
+                                            </a>
+                                        </div>
+                                        <div class="card-footer">
+                                            <form action="{{ route('movies.destroy', $movie['relation_id']) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <div>
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="bi bi-star-fill"></i> Remove
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
                         @endif
                     </div>
@@ -61,7 +86,8 @@
                                                 @method('delete')
                                                 <div>
                                                     <button type="submit" class="btn btn-danger">
-                                                        <i class="bi bi-x"></i> Remove</button>
+                                                        <i class="bi bi-x"></i> Remove
+                                                    </button>
                                                 </div>
                                             </form>
                                         </div>
