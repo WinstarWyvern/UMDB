@@ -3,35 +3,68 @@
 
 @section('content')
     <div class="container text-white">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center col-md-10">
             <h1>Welcome to {{ Auth::user()->name }} List</h1>
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
-                        type="button" role="tab" aria-controls="pills-home" aria-selected="true">Movie List</button>
+                    <button class="nav-link active" id="pills-movie-tab" data-bs-toggle="pill" data-bs-target="#pills-movie"
+                        type="button" role="tab" aria-controls="pills-movie" aria-selected="true">Movie List</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
-                        type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Tv Show
+                    <button class="nav-link" id="pills-tvshow-tab" data-bs-toggle="pill" data-bs-target="#pills-tvshow"
+                        type="button" role="tab" aria-controls="pills-tvshow" aria-selected="false">Tv Show
                         List</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
-                        type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Favorite
+                    <button class="nav-link" id="pills-people-tab" data-bs-toggle="pill" data-bs-target="#pills-people"
+                        type="button" role="tab" aria-controls="pills-people" aria-selected="false">Favorite
                         People</button>
                 </li>
             </ul>
             <div class="tab-content text-white" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+                <div class="tab-pane fade show active" id="pills-movie" role="tabpanel" aria-labelledby="pills-movie-tab"
                     tabindex="0">Movie List
                 </div>
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+                <div class="tab-pane fade" id="pills-tvshow" role="tabpanel" aria-labelledby="pills-tvshow-tab"
                     tabindex="0">
                     Tv Show List
                 </div>
-                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"
+                <div class="tab-pane fade" id="pills-people" role="tabpanel" aria-labelledby="pills-people-tab"
                     tabindex="0">
-                    Favorite People
+
+                    <div class="row text-dark">
+                        @if (count($people) <= 0)
+                            <h1>No Favorite People Yet</h1>
+                        @else
+                            @foreach ($people as $person)
+                                <div class="col-lg-3 my-2">
+                                    <div class="card">
+                                        <img src="https://image.tmdb.org/t/p/w185/{{ $person['profile_path'] }}"
+                                            class="card-img-top img-fluid">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $person['name'] }}</h5>
+                                            <p class="card-text">&#x2605; {{ $person['popularity'] }}</p>
+                                            <div>
+                                                <a href="/people/{{ $person['id'] }}" class="btn btn-primary">Read
+                                                    more..</a>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <form action="{{ route('people.destroy', $person['relation_id']) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <div>
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="bi bi-star-fill"></i> Remove Favorite</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

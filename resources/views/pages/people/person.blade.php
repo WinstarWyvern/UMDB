@@ -79,7 +79,6 @@
                         <form action="{{ route('people.destroy', $userPerson['id']) }}" method="POST">
                             @csrf
                             @method('delete')
-                            <input type="hidden" name="person_id" value="{{ $person['id'] }}">
                             <div>
                                 <button type="submit" class="btn btn-danger">
                                     <i class="bi bi-star-fill"></i> Remove Favorite</button>

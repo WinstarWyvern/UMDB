@@ -8,6 +8,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\TvShowController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserListController;
 use App\Http\Controllers\WelcomeController;
 
 /*
@@ -39,6 +40,4 @@ Route::resource('/profiles', ProfileController::class)->parameters(['profiles' =
 
 Route::resource('/users', UserController::class);
 
-Route::get('/list', function(){
-    return view('pages.list.user_list');
-});
+Route::get('/list', UserListController::class);
