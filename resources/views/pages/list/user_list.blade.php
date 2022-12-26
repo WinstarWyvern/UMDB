@@ -1,24 +1,27 @@
 @extends('layouts.app')
-@section('title', Auth::user()->name . ' List')
+@section('title', 'My List')
 
 @section('content')
     <div class="container text-white">
         <div class="row justify-content-center col-md-10">
-            <h1>Welcome to {{ Auth::user()->name }} List</h1>
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <ul class="nav nav-pills mb-3 fs-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="pills-movie-tab" data-bs-toggle="pill" data-bs-target="#pills-movie"
-                        type="button" role="tab" aria-controls="pills-movie" aria-selected="true">Movie List</button>
+                        type="button" role="tab" aria-controls="pills-movie" aria-selected="true">
+                        Movie List
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-tvshow-tab" data-bs-toggle="pill" data-bs-target="#pills-tvshow"
-                        type="button" role="tab" aria-controls="pills-tvshow" aria-selected="false">Tv Show
-                        List</button>
+                        type="button" role="tab" aria-controls="pills-tvshow" aria-selected="false">
+                        Tv Show List
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-people-tab" data-bs-toggle="pill" data-bs-target="#pills-people"
-                        type="button" role="tab" aria-controls="pills-people" aria-selected="false">Favorite
-                        People</button>
+                        type="button" role="tab" aria-controls="pills-people" aria-selected="false">
+                        Favorite People
+                    </button>
                 </li>
             </ul>
             <div class="tab-content text-white" id="pills-tabContent">
