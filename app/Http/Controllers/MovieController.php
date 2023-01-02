@@ -87,7 +87,13 @@ class MovieController extends Controller
         $movieResponse = Http::get("https://api.themoviedb.org/3/movie/" . $id . "?api_key=2e642658089918c920af9adc5dd79a54&language=en-US");
         $movieTemp = $movieResponse->json();
 
-        $userMovie = Movie::where('user_id', Auth::user()->id)->where('movie_id', $id)->first();
+        if(Auth::user()) {
+            $userMovie = Movie::where('user_id', Auth::user()->id)->where('movie_id', $id)->first();
+        }
+        else {
+            $userMovie = null;
+        }
+
         return view('pages.movie.movie', [
             "movie" => $movieTemp,
             "userMovie" => $userMovie

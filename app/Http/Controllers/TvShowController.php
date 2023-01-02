@@ -85,7 +85,13 @@ class TvShowController extends Controller
         $tvshowResponse = Http::get("https://api.themoviedb.org/3/tv/" . $id . "?api_key=2e642658089918c920af9adc5dd79a54&language=en-US");
         $tvshowTemp = $tvshowResponse->json();
 
-        $userShow = TvShow::where('user_id', Auth::user()->id)->where('show_id', $id)->first();
+        if(Auth::user()) {
+            $userShow = TvShow::where('user_id', Auth::user()->id)->where('show_id', $id)->first();
+        }
+        else {
+            $userShow = null;
+        }
+
         return view('pages.tvshow.tvshow', [
             "show" => $tvshowTemp,
             "userShow" => $userShow

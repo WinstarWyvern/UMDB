@@ -79,7 +79,13 @@ class PersonController extends Controller
         $personResponse = Http::get("https://api.themoviedb.org/3/person/" . $id . "?api_key=2e642658089918c920af9adc5dd79a54&language=en-US");
         $personTemp = $personResponse->json();
 
-        $userPerson = Person::where('user_id', Auth::user()->id)->where('person_id', $id)->first();
+        if(Auth::user()){
+            $userPerson = Person::where('user_id', Auth::user()->id)->where('person_id', $id)->first();
+        }
+        else{
+            $userPerson = null;
+        }
+
         return view('pages.people.person', [
             "person" => $personTemp,
             "userPerson" => $userPerson,
